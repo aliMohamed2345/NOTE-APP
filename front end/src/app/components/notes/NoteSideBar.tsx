@@ -15,6 +15,7 @@ import {
   setNoteId,
   setNotesNumber,
 } from "@/app/redux/slice/NoteSlice";
+import getRelativeTime from "@/app/utils/getRelativeTime";
 export interface noteProps {
   User: string;
   description: string;
@@ -77,7 +78,6 @@ const NoteSideBar = () => {
         dispatch(setNotesNumber(data?.totalNotes));
         if (page === 1) {
           setNotes(data?.notes);
-          dispatch(setNoteId(data?.notes[0]));
         } else {
           setNotes((prev) => [...prev, ...data?.notes]);
         }
@@ -106,7 +106,6 @@ const NoteSideBar = () => {
         credentials: "include",
       });
       const data = await res.json();
-      dispatch(setNoteId(data?.notes[0]));
       setNotes(data.notes);
     } catch (error) {
       console.error("Failed to fetch notes:", error);
@@ -165,7 +164,7 @@ const NoteSideBar = () => {
   return (
     <div
       ref={optionsRef}
-      className="sm:flex flex-col gap-5 text-center sticky px-2 inset-0 h-full bg-secondary w-[25vw] hidden overflow-y-auto"
+      className="sm:flex flex-col gap-5 text-center sticky px-2 inset-0 min-h-screen bg-secondary w-[25vw] hidden overflow-y-auto"
     >
       <h3 className="flex gap-2 font-bold items-center justify-center mt-5 text-textColor text-3xl ">
         <VscNote className="text-purple" /> NoteKeeper
@@ -214,7 +213,9 @@ const NoteSideBar = () => {
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
                   <h1 className="text-left font-bold">{note.title}</h1>
-                  <p className="text-left text-xs">{note.createdAt}</p>
+                  <p className="text-left text-xs">
+                    {getRelativeTime(note.createdAt)}
+                  </p>
                 </div>
                 <span className="relative">
                   <HiDotsVertical

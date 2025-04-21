@@ -48,7 +48,7 @@ export default function Home() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="flex justify-between items-start  ">
+    <div className="flex justify-between items-start min-h-screen ">
       <NoteSideBar />
       <NoteContent />
     </div>

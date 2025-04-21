@@ -1,0 +1,34 @@
+// Function to calculate the relative time
+export default function getRelativeTime(timestamp: string): string {
+  // Convert the timestamp into a Date object
+  const pastDate = new Date(timestamp);
+
+  // Get the current date and time
+  const currentDate = new Date();
+
+  // Calculate the difference in milliseconds
+  const timeDiff = currentDate.getTime() - pastDate.getTime();
+
+  // Calculate years, months, days, hours, minutes, and seconds
+  const seconds = Math.floor(timeDiff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30); 
+  const years = Math.floor(months / 12);
+
+  // Generate the relative time string
+  if (years > 0) {
+    return `${years} year${years > 1 ? "s" : ""} ago`;
+  } else if (months > 0) {
+    return `${months} month${months > 1 ? "s" : ""} ago`;
+  } else if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+  }
+}

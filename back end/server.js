@@ -24,5 +24,4 @@ app.use('/api/notes', notesRoutes)
 
 //DB Connection
 connectToDb()
-
 app.listen(portNumber, () => { console.log(`the server is working on port ${portNumber}`) })
