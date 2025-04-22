@@ -126,7 +126,7 @@ const NoteForm = () => {
             : `opacity-0 scale-0 top-[-300px]`
         } rounded-lg container mx-auto`}
       >
-        <h2 className="text-purple text-4xl font-bold mb-5 mt-2">
+        <h2 className="text-purple text-4xl font-bold mb-5 mt-2 text-center sm:text-left">
           {mode === `Create` ? `Create Note` : `Update Note`}
         </h2>
         <form

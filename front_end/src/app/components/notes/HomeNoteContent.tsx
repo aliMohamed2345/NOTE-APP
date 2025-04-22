@@ -32,7 +32,10 @@ const HomeNoteContent = () => {
           }
         );
         const data = await res.json();
-        setNotes((prev) => [...prev, ...data?.notes]);
+        setNotes((prev) => [
+          ...prev,
+          ...(Array.isArray(data?.notes) ? data.notes : []),
+        ]);
       } catch (error) {
         console.error("Failed to fetch notes:", error);
       }
@@ -102,7 +105,7 @@ const HomeNoteContent = () => {
       >
         {notes.map((note, i) => (
           <div
-            key={note._id}
+            key={i}
             className="bg-secondary p-5 rounded-md flex flex-col min-h-[400px] hover:scale-105 transition-all justify-between gap-10 relative"
           >
             <h6 className="text-center text-purple font-bold text-xl">
@@ -120,12 +123,10 @@ const HomeNoteContent = () => {
               ))}
             </div>
 
-            {/* 📝 Description with line clamp */}
             <p className="line-clamp-4 text-sm text-gray-300 text-center mb-4">
               {note.description}
             </p>
 
-            {/* ✅ Clickable button to set note ID */}
             <button
               onClick={() => dispatch(setNoteId(note._id))}
               className="bg-purple hover:bg-purpleHover text-textColor px-4 py-1 rounded-full font-semibold transition-all"

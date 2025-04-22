@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { VscNote } from "react-icons/vsc";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import { HiDotsVertical } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +24,7 @@ export interface noteProps {
   createdAt: string;
 }
 
-const NoteSideBar = () => {
+const ResponsiveNoteSideMenu = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const optionsRef = useRef<HTMLDivElement | null>(null);
@@ -37,7 +36,7 @@ const NoteSideBar = () => {
 
   useEffect(() => {
     // Redirect if not logged in
-    if (user === null) {
+    if (!user ) {
       router.push("/auth/log-in");
     }
   }, [router, user]);
@@ -164,11 +163,8 @@ const NoteSideBar = () => {
   return (
     <div
       ref={optionsRef}
-      className="sm:flex flex-col gap-5 text-center sticky px-2 inset-0 min-h-screen bg-secondary w-[25vw] hidden overflow-y-auto"
+      className="flex flex-col gap-5 text-center sticky px-3 overflow-y-auto h-screen"
     >
-      <h3 className="flex gap-2 font-bold items-center justify-center mt-5 text-textColor text-3xl ">
-        <VscNote className="text-purple" /> NoteKeeper
-      </h3>
       {/* Search */}
       <div className="relative">
         <input
@@ -176,7 +172,7 @@ const NoteSideBar = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e) => e.key === `Enter` && handleSearchNotes()}
           type="text"
-          className="bg-primary hover:bg-primaryHover transition p-1.5 mt-2 pl-8 rounded-lg text-textColor outline-none w-full"
+          className="bg-secondary hover:bg-primaryHover transition p-1.5 mt-2 pl-8 rounded-lg text-textColor outline-none w-full"
           placeholder="search Notes..."
         />
         <BiSearch
@@ -257,20 +253,19 @@ const NoteSideBar = () => {
               </div>
             </button>
           ))}
-
           {/* Load more */}
-          {notes?.length % 10 === 0 && (
-            <button
-              onClick={() => setPage((prev) => prev + 1)}
-              className="bg-purple hover:bg-purpleHover my-4 rounded-full p-1 transition-all hover:text-textColor font-bold"
-            >
-              Load More
-            </button>
-          )}
         </div>
+        {notes?.length % 10 === 0 && (
+          <button
+            onClick={() => setPage((prev) => prev + 1)}
+            className="bg-purple hover:bg-purpleHover my-4 rounded-full p-1 transition-all hover:text-textColor font-bold"
+          >
+            Load More
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
-export default NoteSideBar;
+export default ResponsiveNoteSideMenu;
