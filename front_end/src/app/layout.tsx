@@ -32,9 +32,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Nav />
-          <Suspense>
-          {children}
-            <Suspense/>
+          <Suspense>{children}</Suspense>
         </ReduxProvider>
       </body>
     </html>
