@@ -38,7 +38,7 @@ const NoteContent = () => {
         <HomeNoteContent />
       ) : (
         <>
-          <div className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-md text-textColor w-fit">
+          <div className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-md text-textColor w-fit mt-14 mb-5">
             <button
               className="hover:text-purple transition-all"
               onClick={() => dispatch(setNoteId(""))}

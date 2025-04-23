@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "./ReduxProvider";
 import Nav from "./components/Nav/Nav";
+import { Suspense } from "react";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Nav />
+          <Suspense>
           {children}
+            <Suspense/>
         </ReduxProvider>
       </body>
     </html>

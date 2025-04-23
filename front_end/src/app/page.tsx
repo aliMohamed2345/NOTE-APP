@@ -6,6 +6,7 @@ import { setUser } from "./redux/slice/authSlice";
 import { useRouter } from "next/navigation";
 import NoteSideBar from "./components/notes/NoteSideBar";
 import NoteContent from "./components/notes/NoteContent";
+import Loading from "./components/auth/Loading";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function Home() {
     getUserData();
   }, [dispatch, router]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   return (
     <div className="flex justify-between items-start min-h-screen ">
