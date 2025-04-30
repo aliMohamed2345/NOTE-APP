@@ -4,6 +4,7 @@ require('dotenv').config()
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const path = require("path");
 //routes
 const authRoutes = require('./routes/authRoutes')
 const notesRoutes = require('./routes/notesRoutes')
@@ -24,7 +25,11 @@ app.get('/', (req, res) => {
 })
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', notesRoutes)
+app.use(express.static(path.join(__dirname, "../client/.next")));
 
+app.get("*", (req, res) => {
+    res.send('hello from the server')
+});
 //DB Connection
 connectToDb()
 app.listen(portNumber, () => { console.log(`the server is working on port ${portNumber}`) })
